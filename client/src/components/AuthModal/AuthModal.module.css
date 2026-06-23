@@ -119,6 +119,18 @@
   font-size: 14px;
 }
 
+.apiError {
+  background-color: #fff5f5;
+  color: #c53030;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #fed7d7;
+}
+
 .loginModal {
   max-width: 500px;
 }

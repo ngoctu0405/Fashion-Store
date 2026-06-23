@@ -15,7 +15,7 @@ const EyeOffIcon = () => (
   </svg>
 );
 
-const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
+const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) => {
   const [mode, setMode] = useState(initialMode);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -54,6 +54,8 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState('');
 
   if (!isOpen) return null;
 
@@ -84,7 +86,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
         if (value !== formData.password) error = 'Mật khẩu xác nhận không khớp';
         break;
       case 'phone':
-        const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+        const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
         if (!value.trim()) {
           error = 'Số điện thoại không được để trống';
         } else if (!phoneRegex.test(value)) {
@@ -108,11 +110,68 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
     const { name, value, type, checked } = e.target;
     const val = type === 'checkbox' ? checked : value;
     setFormData({ ...formData, [name]: val });
+    setApiError(''); // Clear API error on change
     
-    // Clear error while typing if it was already touched
     if (touched[name]) {
       const error = validateField(name, val);
       setErrors({ ...errors, [name]: error });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setApiError('');
+
+    // Final validation
+    const newErrors = {};
+    const fieldsToValidate = mode === 'register' 
+      ? ['fullName', 'email', 'username', 'password', 'confirmPassword', 'phone'] 
+      : ['email', 'password'];
+    
+    fieldsToValidate.forEach(field => {
+      const error = validateField(field, formData[field]);
+      if (error) newErrors[field] = error;
+    });
+
+    if (mode === 'register' && !formData.terms) {
+      newErrors.terms = 'Bạn phải đồng ý với điều khoản sử dụng';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setTouched(fieldsToValidate.reduce((acc, f) => ({ ...acc, [f]: true }), {}));
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const endpoint = mode === 'login' ? 'login' : 'register';
+      const response = await fetch(`http://localhost:5000/api/auth/${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Có lỗi xảy ra, vui lòng thử lại');
+      }
+
+      if (onLoginSuccess) {
+        onLoginSuccess({
+          name: data.user.name || data.user.fullName,
+          email: data.user.email
+        });
+      }
+      onClose();
+    } catch (err) {
+      setApiError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -146,7 +205,9 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
               : 'Trở thành thành viên để nhận ưu đãi'}
           </p>
           
-          <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+          {apiError && <div className={styles.apiError}>{apiError}</div>}
+          
+          <form className={styles.form} onSubmit={handleSubmit}>
             <div className={`${styles.formGrid} ${mode === 'login' ? styles.loginGrid : ''}`}>
               {mode === 'register' && (
                 <div className={styles.inputGroup}>
@@ -158,6 +219,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     value={formData.fullName}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    disabled={isLoading}
                   />
                   {touched.fullName && errors.fullName && <span className={styles.errorText}>{errors.fullName}</span>}
                 </div>
@@ -172,6 +234,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                   value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  disabled={isLoading}
                 />
                 {touched.email && errors.email && <span className={styles.errorText}>{errors.email}</span>}
               </div>
@@ -186,6 +249,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     value={formData.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    disabled={isLoading}
                   />
                   {touched.username && errors.username && <span className={styles.errorText}>{errors.username}</span>}
                 </div>
@@ -201,11 +265,13 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                     value={formData.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    disabled={isLoading}
                   />
                   <button 
                     type="button" 
                     className={styles.toggleBtn}
                     onClick={() => setShowPassword(!showPassword)}
+                    disabled={isLoading}
                   >
                     {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                   </button>
@@ -225,11 +291,13 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                         value={formData.confirmPassword}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        disabled={isLoading}
                       />
                       <button 
                         type="button" 
                         className={styles.toggleBtn}
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        disabled={isLoading}
                       >
                         {showConfirmPassword ? <EyeOffIcon /> : <EyeIcon />}
                       </button>
@@ -246,6 +314,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                       value={formData.phone}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      disabled={isLoading}
                     />
                     {touched.phone && errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
                   </div>
@@ -257,15 +326,16 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                       name="birthday"
                       value={formData.birthday}
                       onChange={handleChange}
+                      disabled={isLoading}
                     />
                   </div>
 
                   <div className={styles.inputGroup}>
                     <label>Giới tính (tuỳ chọn)</label>
                     <div className={styles.radioGroup}>
-                      <label><input type="radio" name="gender" value="male" onChange={handleChange} checked={formData.gender === 'male'} /> Nam</label>
-                      <label><input type="radio" name="gender" value="female" onChange={handleChange} checked={formData.gender === 'female'} /> Nữ</label>
-                      <label><input type="radio" name="gender" value="other" onChange={handleChange} checked={formData.gender === 'other'} /> Khác</label>
+                      <label><input type="radio" name="gender" value="male" onChange={handleChange} checked={formData.gender === 'male'} disabled={isLoading} /> Nam</label>
+                      <label><input type="radio" name="gender" value="female" onChange={handleChange} checked={formData.gender === 'female'} disabled={isLoading} /> Nữ</label>
+                      <label><input type="radio" name="gender" value="other" onChange={handleChange} checked={formData.gender === 'other'} disabled={isLoading} /> Khác</label>
                     </div>
                   </div>
 
@@ -276,15 +346,21 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                         name="terms"
                         checked={formData.terms}
                         onChange={handleChange}
+                        disabled={isLoading}
                       /> Tôi đồng ý với <span className={styles.link}>Điều khoản sử dụng</span>
                     </label>
+                    {touched.terms && errors.terms && <div className={styles.errorText}>{errors.terms}</div>}
                   </div>
                 </>
               )}
             </div>
 
-            <button type="submit" className={styles.submitBtn}>
-              {mode === 'login' ? 'Đăng Nhập' : 'Đăng Ký'}
+            <button 
+              type="submit" 
+              className={styles.submitBtn}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Đang xử lý...' : (mode === 'login' ? 'Đăng Nhập' : 'Đăng Ký')}
             </button>
 
             <p className={styles.footer}>

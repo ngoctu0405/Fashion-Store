@@ -1,0 +1,147 @@
+.header {
+  width: 100%;
+  padding: 25px calc((100% - 1400px) / 2 + 60px);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1520px) {
+  .header {
+    padding: 25px 60px;
+  }
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+.authActions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.authBtn {
+  padding: 10px 30px;
+  border: 1px solid #000;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  cursor: pointer;
+}
+
+.authBtn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.navItem {
+  padding: 14px 20px;
+  border: 1px solid #000;
+  border-radius: 40px;
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.navItem:hover {
+  background-color: #001a57;
+  color: #ffffff;
+  border-color: #001a57;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 26, 87, 0.15);
+}
+
+.navItem:active {
+  transform: translateY(0);
+}
+
+.navItem.active {
+  background-color: #001a57;
+  color: #ffffff;
+  border-color: #001a57;
+  box-shadow: 0 4px 15px rgba(0, 26, 87, 0.25);
+}
+
+.navItem.active:hover {
+  transform: none;
+  box-shadow: 0 4px 15px rgba(0, 26, 87, 0.25);
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 20px 30px;
+  }
+  
+  .topBar {
+    justify-content: center;
+  }
+  
+  .navBar {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .navItem {
+    padding: 8px 15px;
+    font-size: 16px;
+  }
+  
+  .authBtn {
+    padding: 4px 15px;
+    font-size: 16px;
+  }
+  
+  .logoImg {
+    height: 35px;
+  }
+}

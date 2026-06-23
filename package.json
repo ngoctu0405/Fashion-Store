@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "vite"
+    "dev": "vite client",
+    "install:client": "npm install --prefix client",
+    "install:server": "npm install --prefix server"
   },
   "devDependencies": {
     "vite": "^8.0.16"

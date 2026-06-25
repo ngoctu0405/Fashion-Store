@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 
 function Footer() {
@@ -26,12 +27,22 @@ function Footer() {
         <div className={styles.section}>
           <h3>HỖ TRỢ KHÁCH HÀNG</h3>
 
-          <ul>
-            <li>Chính sách đổi hàng và bảo hành</li>
-            <li>Chính sách Membership</li>
-            <li>Chính sách ưu đãi sinh nhật</li>
-            <li>Chính sách bảo mật</li>
-            <li>Chính sách giao hàng</li>
+          <ul className={styles.policyList}>
+            <li>
+              <Link to="/exchange-policy">Chính sách đổi hàng và bảo hành</Link>
+            </li>
+
+            <li>
+              <Link to="/membership-policy">Chính sách Membership</Link>
+            </li>
+
+            <li>
+              <Link to="/privacy-policy">Chính sách bảo mật</Link>
+            </li>
+
+            <li>
+              <Link to="/shipping-policy">Chính sách giao hàng</Link>
+            </li>
           </ul>
         </div>
 

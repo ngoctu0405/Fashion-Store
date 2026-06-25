@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { Search, ShoppingCart, Bell, User, Menu } from "lucide-react";
 import styles from "./Header.module.css";
@@ -154,17 +155,15 @@ const Header = () => {
 
       <nav className={styles.navBar}>
         {navItems.map((item) => (
-          <a
+          <NavLink
             key={item.name}
-            href={item.path}
-            className={`${styles.navItem} ${activeNavItem === item.name ? styles.active : ""}`}
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveNavItem(item.name);
-            }}
+            to={item.path}
+            className={({ isActive }) =>
+              `${styles.navItem} ${isActive ? styles.active : ""}`
+            }
           >
             {item.name}
-          </a>
+          </NavLink>
         ))}
       </nav>
 

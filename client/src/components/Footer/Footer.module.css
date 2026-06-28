@@ -1,32 +1,46 @@
 .footer {
-  background-color: #111;
-  color: white;
-  padding: 50px 80px 20px;
+  background: #111;
+  color: #fff;
+  padding: 60px 80px 25px;
 }
+
+/* =======================
+        GRID
+======================= */
 
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 50px;
 }
+
+/* =======================
+      LOGO
+======================= */
 
 .logo {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 15px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
 }
+
+/* =======================
+      SECTION
+======================= */
 
 .section h3 {
-  margin-bottom: 15px;
-  font-size: 18px;
-  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #fff;
 }
 
-.section p,
-.section li {
-  color: #ccc;
+.section p {
+  color: #bdbdbd;
+  font-size: 15px;
   line-height: 1.8;
-  font-size: 14px;
+  margin-bottom: 8px;
 }
 
 .section ul {
@@ -36,92 +50,131 @@
 }
 
 .section li {
-  cursor: pointer;
-  transition: 0.3s;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
-.section li:hover {
-  color: white;
+/* Link */
+
+.section li a {
+  color: #bdbdbd;
+  text-decoration: none;
+  transition: all 0.25s ease;
 }
+
+.section li a:hover {
+  color: #fff;
+  padding-left: 5px;
+}
+
+/* =======================
+      SOCIAL
+======================= */
 
 .socials {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
 .socials a {
-  color: #ccc;
+  color: #bdbdbd;
   text-decoration: none;
-  transition: 0.3s;
+  transition: all 0.25s ease;
 }
 
 .socials a:hover {
   color: white;
+  padding-left: 5px;
 }
 
-/* Payment */
+/* =======================
+      PAYMENT
+======================= */
 
 .paymentSection {
-  margin-top: 40px;
-  padding-top: 25px;
-  border-top: 1px solid #333;
+  margin-top: 55px;
+  padding-top: 30px;
+  border-top: 1px solid #2d2d2d;
 }
 
 .paymentSection h3 {
-  margin-bottom: 15px;
+  text-align: center;
+  margin-bottom: 22px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .paymentMethods {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
   justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .payment {
-  padding: 8px 16px;
-  border: 1px solid #444;
-  border-radius: 6px;
-  background: #1a1a1a;
-  font-size: 14px;
-  font-weight: 500;
+  background: #1d1d1d;
+  border: 1px solid #333;
+  padding: 10px 22px;
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: default;
 }
 
-/* Footer Bottom */
+.payment:hover {
+  background: #292929;
+  border-color: #666;
+}
+
+/* =======================
+      FOOTER BOTTOM
+======================= */
 
 .bottom {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid #333;
+  margin-top: 45px;
+  padding-top: 22px;
+  border-top: 1px solid #2d2d2d;
   text-align: center;
-  color: #999;
-  font-size: 14px;
 }
 
 .bottom p {
-  margin: 6px 0;
+  color: #888;
+  font-size: 14px;
+  margin: 0;
+  letter-spacing: 0.5px;
 }
 
-/* Tablet */
+/* =======================
+      TABLET
+======================= */
 
 @media (max-width: 992px) {
+  .footer {
+    padding: 50px 40px 25px;
+  }
+
   .container {
     grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
   }
 }
 
-/* Mobile */
+/* =======================
+      MOBILE
+======================= */
 
 @media (max-width: 600px) {
   .footer {
-    padding: 30px 20px;
+    padding: 40px 20px;
   }
 
   .container {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 35px;
+    text-align: center;
+  }
+
+  .socials {
+    align-items: center;
   }
 
   .paymentMethods {

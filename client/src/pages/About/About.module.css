@@ -1,0 +1,51 @@
+.zantustoIntroContainer {
+  text-align: center;
+  padding: 40px 20px;
+  background: #060b13; /* Màu nền xanh đen lịch lãm */
+  color: #ffffff;
+  font-family: "Montserrat", "Helvetica Neue", sans-serif;
+}
+
+.zantustoTagline {
+  font-size: 50px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #3b82f6; /* Màu xanh dương thương hiệu */
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.zantustoIntroText {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 15px auto;
+  color: #e2e8f0;
+}
+
+.brandName {
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.accentLine {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* Giao diện responsive */
+@media (max-width: 768px) {
+  .zantustoIntroText {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+  .zantustoTagline {
+    font-size: 11px;
+  }
+}

@@ -5,6 +5,15 @@ import styles from "./Header.module.css";
 import AuthModal from "../AuthModal/AuthModal";
 import ProfileModal from "../ProfileModal/ProfileModal";
 
+const getDisplayName = (fullName) => {
+  if (!fullName) return "";
+  if (fullName.length > 10) {
+    const parts = fullName.trim().split(/\s+/);
+    return parts[parts.length - 1]; // Lấy tên gọi chính (từ cuối cùng) nếu tên quá dài (> 10 ký tự)
+  }
+  return fullName;
+};
+
 const Header = () => {
   const [activeNavItem, setActiveNavItem] = useState("Trang Chủ");
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -73,7 +82,7 @@ const Header = () => {
                 <div className={styles.userProfile}>
                   <div className={styles.userInfo}>
                     <User size={24} strokeWidth={1.5} />
-                    <span className={styles.userName}>Hi , {user.name}</span>
+                    <span className={styles.userName}>Xin chào, {getDisplayName(user.name)}</span>
                   </div>
                   <div className={styles.menuIcon} onClick={toggleDropdown}>
                     <Menu size={28} strokeWidth={1.5} />
@@ -86,7 +95,7 @@ const Header = () => {
                       <div className={styles.userInfo}>
                         <User size={24} strokeWidth={1.5} />
                         <span className={styles.userName}>
-                          Hi , {user.name}
+                          Xin chào, {getDisplayName(user.name)}
                         </span>
                       </div>
                       <div
@@ -103,17 +112,7 @@ const Header = () => {
                           className={styles.dropdownItem}
                           onClick={handleOpenProfile}
                         >
-                          Thông tin tài khoản
-                        </button>
-                      </li>
-                      <li>
-                        <button className={styles.dropdownItem}>
-                          Lịch sử mua hàng
-                        </button>
-                      </li>
-                      <li>
-                        <button className={styles.dropdownItem}>
-                          Mã giảm giá
+                          Quản lý thông tin
                         </button>
                       </li>
                       <li>
@@ -121,6 +120,19 @@ const Header = () => {
                           Đổi mật khẩu
                         </button>
                       </li>
+                      <li>
+                        <button className={styles.dropdownItem}>
+                          Lịch sử đơn hàng
+                        </button>
+                      </li>
+                      <li>
+                        <button className={styles.dropdownItem}>
+                          Mã giảm giá
+                        </button>
+                      </li>
+                    </ul>
+                    <div className={styles.divider}></div>
+                    <ul className={styles.dropdownList}>
                       <li>
                         <button
                           className={`${styles.dropdownItem} ${styles.logoutBtn}`}

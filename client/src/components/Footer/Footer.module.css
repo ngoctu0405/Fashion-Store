@@ -10,7 +10,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  grid-template-columns: 1.2fr 1fr 1fr;
   gap: 50px;
 }
 
@@ -53,6 +53,39 @@
   margin-bottom: 12px;
 }
 
+.benefitList li {
+  margin-bottom: 16px;
+}
+
+.benefitList strong {
+  display: block;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.benefitList span {
+  display: block;
+  margin-top: 5px;
+  color: #a8a8a8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.membershipLink {
+  display: inline-block;
+  margin-top: 2px;
+  color: #9fc0ff;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.membershipLink:hover {
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
 /* Link */
 
 .section li a {
@@ -92,7 +125,7 @@
 ======================= */
 
 .paymentSection {
-  margin-top: 55px;
+  margin-top: 34px;
   padding-top: 30px;
   border-top: 1px solid #2d2d2d;
 }

@@ -15,16 +15,6 @@ function Footer() {
 
         {/* Cột 2 */}
         <div className={styles.section}>
-          <h3>ƯU ĐÃI KHÁCH HÀNG</h3>
-
-          <ul>
-            <li>Chương trình tích điểm</li>
-            <li>Đổi điểm sang thẻ quà tặng</li>
-          </ul>
-        </div>
-
-        {/* Cột 3 */}
-        <div className={styles.section}>
           <h3>HỖ TRỢ KHÁCH HÀNG</h3>
 
           <ul className={styles.policyList}>
@@ -46,7 +36,7 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Cột 4 */}
+        {/* Cột 3 */}
         <div className={styles.section}>
           <h3>KẾT NỐI VỚI CHÚNG TÔI</h3>
 

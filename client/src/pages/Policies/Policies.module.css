@@ -1,0 +1,17 @@
+.page { min-height: 70vh; background: linear-gradient(180deg, #edf4ff 0, #f8fafc 420px); color: #172033; font-family: Arial, Helvetica, sans-serif; }
+.hero { position: relative; overflow: hidden; padding: 76px 20px 118px; background: linear-gradient(130deg, #07152d, #173c8a); color: #fff; text-align: center; }
+.hero::after { position: absolute; right: -80px; bottom: -160px; width: 420px; height: 420px; border: 1px solid rgba(191, 219, 254, .2); border-radius: 50%; content: ""; }
+.hero p { margin: 0 0 10px; color: #bfdbfe; font-size: 13px; font-weight: 700; letter-spacing: 2px; }
+.hero h1 { max-width: 800px; margin: 0 auto 12px; color: #fff; font-size: clamp(30px, 4vw, 48px); }
+.hero span { color: #dbeafe; font-size: 15px; }
+.content { max-width: 850px; margin: -62px auto 0; padding: 0 20px 88px; }
+.article { position: relative; padding: clamp(30px, 5vw, 58px); border: 1px solid rgba(191, 219, 254, .8); border-radius: 24px; background: #fff; box-shadow: 0 22px 48px rgba(15, 23, 42, .14); }
+.article > svg { display: block; box-sizing: content-box; width: 27px; height: 27px; margin: 0 auto 20px; padding: 12px; border-radius: 50%; color: #fff; background: #2563eb; box-shadow: 0 8px 18px rgba(37, 99, 235, .25); }
+.intro { max-width: 650px; margin: 0 auto 38px; color: #475569; font-size: 20px; line-height: 1.68; text-align: center; }
+.article section { padding: 27px 0; border-top: 1px solid #e5e7eb; }
+.article h2 { display: flex; align-items: center; gap: 13px; margin: 0 0 15px; color: #0f172a; font-size: 25px; }
+.article h2 span { display: inline-grid; width: 31px; height: 31px; place-items: center; border-radius: 50%; color: #1d4ed8; background: #dbeafe; font-size: 12px; letter-spacing: 0; }
+.article ul { margin: 0; padding-left: 22px; color: #475569; line-height: 1.7; }
+.article li + li { margin-top: 8px; }
+.contact { margin-top: 18px; padding: 20px 22px; border-left: 4px solid #2563eb; border-radius: 0 12px 12px 0; background: #eff6ff; color: #1e3a8a; line-height: 1.6; }
+@media (max-width: 768px) { .hero { padding: 55px 18px 92px; } .content { margin-top: -42px; padding: 0 18px 58px; } .article { border-radius: 18px; } .intro { font-size: 18px; } .article h2 { font-size: 22px; } }

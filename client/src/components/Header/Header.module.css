@@ -300,6 +300,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   flex: 1;
 
   transition:
@@ -351,6 +352,20 @@
 
 .navItem.active:hover {
   transform: scale(1.03);
+}
+
+.navItemWithMenu {
+  justify-content: center;
+}
+
+.navMenuIcon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-shrink: 0;
+  display: block;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {

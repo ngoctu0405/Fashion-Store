@@ -25,7 +25,7 @@ const Header = () => {
   const navItems = [
     { name: "Trang Chủ", path: "/" },
     { name: "Giới Thiệu", path: "/about" },
-    { name: "Sản Phẩm", path: "/products" },
+    { name: "Sản Phẩm", path: "/products", icon: true },
     { name: "Khuyến Mãi", path: "/promotions" },
   ];
 
@@ -171,10 +171,18 @@ const Header = () => {
             key={item.name}
             to={item.path}
             className={({ isActive }) =>
-              `${styles.navItem} ${isActive ? styles.active : ""}`
+              `${styles.navItem} ${item.icon ? styles.navItemWithMenu : ""} ${isActive ? styles.active : ""}`
             }
           >
             {item.name}
+            {item.icon && (
+              <Menu
+                className={styles.navMenuIcon}
+                size={22}
+                strokeWidth={2.25}
+                aria-hidden="true"
+              />
+            )}
           </NavLink>
         ))}
       </nav>

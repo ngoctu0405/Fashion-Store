@@ -20,16 +20,26 @@ const ShortsIcon = () => (
 
 const OutfitIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M8 5.5 10.2 4h3.6L16 5.5l3 1.6-1.7 2.4H6.7L5 7.1 8 5.5Z" />
-    <path d="M7 12h10l-.8 8H7.8L7 12Z" />
+    <path d="M12 4a2 2 0 0 1 2 2c0 1.2-.8 1.7-1.8 2.4l-5.4 3.8a2.4 2.4 0 0 0 1.4 4.4h7.6" />
+    <path d="m12.2 8.4 5 3.6a2.4 2.4 0 0 1-1.4 4.4H8.2" />
+    <path d="M7.5 16.4h9" />
   </svg>
 );
 
 const CapIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M4 14c0-4.4 3.6-8 8-8s8 3.6 8 8" />
-    <path d="M3 16.5h18c0 1.4-2.5 2.5-9 2.5s-9-1.1-9-2.5Z" />
-    <path d="M12 6v2" />
+    <circle cx="7.5" cy="13" r="3.5" />
+    <circle cx="16.5" cy="13" r="3.5" />
+    <path d="M11 13h2M4 12.4l-1.5-1.1M20 12.4l1.5-1.1" />
+  </svg>
+);
+
+const AllProductsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="4" y="4" width="6" height="6" rx="1" />
+    <rect x="14" y="4" width="6" height="6" rx="1" />
+    <rect x="4" y="14" width="6" height="6" rx="1" />
+    <rect x="14" y="14" width="6" height="6" rx="1" />
   </svg>
 );
 
@@ -252,15 +262,22 @@ const Header = () => {
               </button>
               {isProductsMenuOpen && (
                 <div className={styles.productsDropdown}>
+                  <NavLink
+                    to="/products"
+                    end
+                    className={styles.productsDropdownItem}
+                  >
+                    <span className={styles.productsDropdownIcon}><AllProductsIcon /></span>
+                    <span>Tất cả sản phẩm</span>
+                  </NavLink>
+                  <div className={styles.dropdownDivider} />
                   {productCategories.map((category) => {
                     const Icon = category.icon;
                     return (
                       <NavLink
                         key={category.name}
                         to={category.path}
-                        className={({ isActive }) =>
-                          `${styles.productsDropdownItem} ${isActive ? styles.productsDropdownItemActive : ""}`
-                        }
+                        className={styles.productsDropdownItem}
                       >
                         <span className={styles.productsDropdownIcon}>
                           <Icon />

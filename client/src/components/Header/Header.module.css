@@ -411,54 +411,53 @@
   left: 0;
   right: 0;
   margin-top: -1px;
-  background: #fff;
-  border: 1px solid #000;
-  border-radius: 0 0 22px 22px;
-  padding: 14px 12px 16px;
+  min-width: 250px;
+  background: #ffffff;
+  border: 1px solid #d6e0ef;
+  border-top: 0;
+  border-radius: 0 0 20px 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  gap: 5px;
+  box-shadow: 0 12px 25px rgba(12, 43, 100, 0.14);
   box-sizing: border-box;
+  animation: productsMenuEnter 0.22s ease-out both;
 }
+
+.dropdownDivider { height: 1px; margin: 3px 4px; background: #e5ebf4; }
 
 .productsDropdownItem {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 16px 8px 10px;
-  border: 1px solid #000;
-  border-radius: 40px;
+  gap: 11px;
+  padding: 7px 9px;
+  border: 1px solid transparent;
+  border-radius: 9px;
   text-decoration: none;
-  color: #111;
-  font-size: 18px;
-  font-weight: 500;
-  background: #fff;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  color: #1b3159;
+  font-size: 20px;
+  font-weight: 600;
+  background: transparent;
+  transition: background-color .2s ease, color .2s ease;
 }
 
 .productsDropdownItem:hover {
-  background-color: #001a57;
-  color: #fff;
-  border-color: #001a57;
-}
-
-.productsDropdownItemActive {
-  background-color: #001a57;
-  color: #fff;
-  border-color: #001a57;
+  background-color: #e7f0ff;
+  color: #164a9c;
+  border-color: #cadcf8;
 }
 
 .productsDropdownIcon {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ececec;
-  border-radius: 8px;
-  color: #4a4a4a;
+  background: #e5efff;
+  border-radius: 10px;
+  color: #235db8;
 }
 
 .productsDropdownIcon svg {
@@ -466,11 +465,12 @@
   height: 22px;
 }
 
-.productsDropdownItem:hover .productsDropdownIcon,
-.productsDropdownItemActive .productsDropdownIcon {
-  background: rgba(255, 255, 255, 0.18);
+.productsDropdownItem:hover .productsDropdownIcon {
+  background: #2864bf;
   color: #fff;
 }
+
+@keyframes productsMenuEnter { from { opacity: 0; transform: translateY(-8px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
 @media (max-width: 768px) {
   .header {
@@ -497,9 +497,11 @@
   }
 
   .productsDropdownItem {
-    font-size: 14px;
+    font-size: 17px;
     padding: 6px 12px 6px 8px;
   }
+
+  .productsDropdown { min-width: 230px; padding: 9px; }
 
   .productsDropdownIcon {
     width: 28px;

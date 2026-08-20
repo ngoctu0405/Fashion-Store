@@ -37,7 +37,7 @@ function AppRoutes() {
       />
 
       <Route
-        path="/products"
+        path="/products/*"
         element={
           <MainLayout>
             <Products />

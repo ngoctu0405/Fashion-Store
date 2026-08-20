@@ -1,9 +1,44 @@
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { Search, ShoppingCart, Bell, User, Menu } from "lucide-react";
 import styles from "./Header.module.css";
 import AuthModal from "../AuthModal/AuthModal";
 import ProfileModal from "../ProfileModal/ProfileModal";
+
+const ShirtIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M8 4.5 10.2 3h3.6L16 4.5l4 2.2-2.2 3.1-1.8-.8V20H8V9l-1.8.8L4 6.7 8 4.5Z" />
+  </svg>
+);
+
+const ShortsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M5 7h14l-1.2 11H13l-1-5.5-1 5.5H6.2L5 7Z" />
+    <path d="M5 7h14" />
+  </svg>
+);
+
+const OutfitIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M8 5.5 10.2 4h3.6L16 5.5l3 1.6-1.7 2.4H6.7L5 7.1 8 5.5Z" />
+    <path d="M7 12h10l-.8 8H7.8L7 12Z" />
+  </svg>
+);
+
+const CapIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M4 14c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+    <path d="M3 16.5h18c0 1.4-2.5 2.5-9 2.5s-9-1.1-9-2.5Z" />
+    <path d="M12 6v2" />
+  </svg>
+);
+
+const productCategories = [
+  { name: "Mẫu Áo", path: "/products/ao", icon: ShirtIcon },
+  { name: "Mẫu Quần", path: "/products/quan", icon: ShortsIcon },
+  { name: "Set Đồ", path: "/products/set", icon: OutfitIcon },
+  { name: "Phụ Kiện", path: "/products/phu-kien", icon: CapIcon },
+];
 
 const getDisplayName = (fullName) => {
   if (!fullName) return "";
@@ -21,11 +56,15 @@ const Header = () => {
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isProductsMenuOpen, setIsProductsMenuOpen] = useState(false);
+  const productsMenuRef = useRef(null);
+  const location = useLocation();
+  const isProductsActive = location.pathname.startsWith("/products");
 
   const navItems = [
     { name: "Trang Chủ", path: "/" },
     { name: "Giới Thiệu", path: "/about" },
-    { name: "Sản Phẩm", path: "/products", icon: true },
+    { name: "Sản Phẩm", path: "/products", dropdown: true },
     { name: "Khuyến Mãi", path: "/promotions" },
   ];
 
@@ -51,6 +90,29 @@ const Header = () => {
     setIsProfileModalOpen(true);
     setIsDropdownOpen(false);
   };
+
+  const toggleProductsMenu = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsProductsMenuOpen((open) => !open);
+  };
+
+  useEffect(() => {
+    if (!isProductsMenuOpen) return undefined;
+
+    const handlePointerDown = (event) => {
+      if (!productsMenuRef.current?.contains(event.target)) {
+        setIsProductsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, [isProductsMenuOpen]);
+
+  useEffect(() => {
+    setIsProductsMenuOpen(false);
+  }, [location.pathname, location.search]);
 
   return (
     <header className={styles.header}>
@@ -166,25 +228,62 @@ const Header = () => {
       </div>
 
       <nav className={styles.navBar}>
-        {navItems.map((item) => (
-          <NavLink
-            key={item.name}
-            to={item.path}
-            className={({ isActive }) =>
-              `${styles.navItem} ${item.icon ? styles.navItemWithMenu : ""} ${isActive ? styles.active : ""}`
-            }
-          >
-            {item.name}
-            {item.icon && (
-              <Menu
-                className={styles.navMenuIcon}
-                size={22}
-                strokeWidth={2.25}
-                aria-hidden="true"
-              />
-            )}
-          </NavLink>
-        ))}
+        {navItems.map((item) =>
+          item.dropdown ? (
+            <div
+              key={item.name}
+              className={`${styles.productsNav} ${isProductsMenuOpen ? styles.productsNavOpen : ""}`}
+              ref={productsMenuRef}
+            >
+              <button
+                type="button"
+                className={`${styles.navItem} ${styles.navItemWithMenu} ${isProductsActive || isProductsMenuOpen ? styles.active : ""}`}
+                onClick={toggleProductsMenu}
+                aria-expanded={isProductsMenuOpen}
+                aria-haspopup="true"
+              >
+                {item.name}
+                <Menu
+                  className={styles.navMenuIcon}
+                  size={22}
+                  strokeWidth={2.25}
+                  aria-hidden="true"
+                />
+              </button>
+              {isProductsMenuOpen && (
+                <div className={styles.productsDropdown}>
+                  {productCategories.map((category) => {
+                    const Icon = category.icon;
+                    return (
+                      <NavLink
+                        key={category.name}
+                        to={category.path}
+                        className={({ isActive }) =>
+                          `${styles.productsDropdownItem} ${isActive ? styles.productsDropdownItemActive : ""}`
+                        }
+                      >
+                        <span className={styles.productsDropdownIcon}>
+                          <Icon />
+                        </span>
+                        <span>{category.name}</span>
+                      </NavLink>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          ) : (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              className={({ isActive }) =>
+                `${styles.navItem} ${isActive ? styles.active : ""}`
+              }
+            >
+              {item.name}
+            </NavLink>
+          )
+        )}
       </nav>
 
       <AuthModal

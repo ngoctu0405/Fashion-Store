@@ -1,0 +1,1 @@
+import DataPage from "./DataPage"; export default function Inventory(){return <DataPage title="Kho hàng" items={["Áo polo Signature — 4 còn lại","Kính mắt Avenue — 7 còn lại","Túi da Mini Tote — 9 còn lại"]}/>}

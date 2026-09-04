@@ -1,0 +1,1 @@
+import DataPage from "./DataPage"; export default function Reports(){return <><DataPage title="Báo cáo" items={["Doanh thu tháng","Đơn hoàn tất","Sản phẩm bán chạy"]}/><div className="cards"><article><p>Doanh thu tháng</p><h3>382.450.000₫</h3></article><article><p>Đơn hoàn tất</p><h3>328</h3></article></div></>}

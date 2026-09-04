@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "vite client",
     "dev:server": "npm run dev --prefix server",
+    "dev:admin": "npm run dev --prefix admin",
     "install:client": "npm install --prefix client",
-    "install:server": "npm install --prefix server"
+    "install:server": "npm install --prefix server",
+    "install:admin": "npm install --prefix admin"
   },
   "devDependencies": {
     "vite": "^8.0.16"

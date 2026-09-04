@@ -1,0 +1,14 @@
+
+# Environment secrets
+.env
+**/.env
+
+# Allow example env files
+!.env.example
+!**/.env.example
+
+# Dependencies
+**/node_modules/
+
+# Build output
+**/dist/

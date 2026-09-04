@@ -350,27 +350,31 @@
 }
 .finalCta {
   padding: 105px 20px;
-  background: #001a57;
-  color: #fff;
+  background: linear-gradient(135deg, #dcecff, #f5f9ff);
+  color: #102b57;
   text-align: center;
 }
 .finalCta .eyebrow {
-  color: #9fc1ff;
+  color: #1a56ad;
 }
 .finalCta h2 {
   margin: 0;
+  color: #102b57;
   font-size: clamp(31px, 4vw, 53px);
   letter-spacing: -1.5px;
   line-height: 1.15;
 }
 .finalCta a {
-  background: #fff;
-  color: #001a57;
-  border-color: #fff;
+  background: #001a57;
+  color: #fff;
+  border-color: #001a57;
 }
 .finalCta a:hover {
   transform: translateY(-3px);
   box-shadow: 0 13px 23px rgba(0, 0, 0, 0.18);
+}
+.slogan {
+  color: #102b57;
 }
 
 @media (max-width: 760px) {

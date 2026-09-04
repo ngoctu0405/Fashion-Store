@@ -2,11 +2,9 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import {
   ArrowRight,
   ShoppingBag,
-  SlidersHorizontal,
   Sparkles,
 } from "lucide-react";
 import styles from "./Products.module.css";
-import accessoryImage from "../../assets/About/banner2.png";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { products } from "../../data/products";
 
@@ -23,13 +21,17 @@ function Products() {
   const selected = collections.find(
     (collection) => pathname === collection.path,
   );
-  const filteredProducts = selected
+  const searchTerm = searchParams.get("search")?.trim().toLowerCase() || "";
+  const categoryProducts = selected
     ? products.filter((product) => product.category === selected.name)
     : products;
+  const filteredProducts = categoryProducts.filter((product) =>
+    `${product.name} ${product.category}`.toLowerCase().includes(searchTerm),
+  );
   const pageCount = Math.ceil(filteredProducts.length / 12);
   const currentPage = Math.min(
     Math.max(Number(searchParams.get("page")) || 1, 1),
-    pageCount,
+    Math.max(pageCount, 1),
   );
   const shownProducts = filteredProducts.slice(
     (currentPage - 1) * 12,
@@ -78,6 +80,7 @@ function Products() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+        {searchTerm && <p className={styles.resultCount}>Kết quả tìm kiếm cho “{searchParams.get("search")}”: {filteredProducts.length} sản phẩm</p>}
         {pageCount > 1 && (
           <nav className={styles.pagination} aria-label="Phân trang sản phẩm">
             {Array.from({ length: pageCount }, (_, index) => (

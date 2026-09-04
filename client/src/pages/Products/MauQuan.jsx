@@ -1,7 +1,7 @@
-import styles from "./Products.module.css";
+import Products from "./Products";
 
 function MauQuan() {
-  return <h1 className={styles.title}>Mẫu Quần</h1>;
+  return <Products />;
 }
 
 export default MauQuan;

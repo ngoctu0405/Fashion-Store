@@ -1,8 +1,7 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { Search, ShoppingCart, Bell, User, Menu } from "lucide-react";
+import { Search, ShoppingCart, Bell, User, Menu, Minus, Plus, Trash2, X } from "lucide-react";
 import styles from "./Header.module.css";
-import AuthModal from "../AuthModal/AuthModal";
 import ProfileModal from "../ProfileModal/ProfileModal";
 
 const ShirtIcon = () => (
@@ -60,14 +59,22 @@ const getDisplayName = (fullName) => {
 };
 
 const Header = () => {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState("login");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("zantustoUser")) || null;
+    } catch {
+      return null;
+    }
+  });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isProductsMenuOpen, setIsProductsMenuOpen] = useState(false);
+  const [activePanel, setActivePanel] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("zantustoCart") || "[]"));
   const productsMenuRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const isProductsActive = location.pathname.startsWith("/products");
 
   const navItems = [
@@ -77,17 +84,10 @@ const Header = () => {
     { name: "Khuyến Mãi", path: "/promotions" },
   ];
 
-  const openAuthModal = (mode) => {
-    setAuthMode(mode);
-    setIsAuthModalOpen(true);
-  };
-
-  const handleLoginSuccess = (userData) => {
-    setUser(userData);
-  };
-
   const handleLogout = () => {
     setUser(null);
+    localStorage.removeItem("zantustoUser");
+    localStorage.removeItem("zantustoToken");
     setIsDropdownOpen(false);
   };
 
@@ -104,6 +104,18 @@ const Header = () => {
     event.preventDefault();
     event.stopPropagation();
     setIsProductsMenuOpen((open) => !open);
+  };
+
+  const saveCart = (nextCart) => {
+    setCart(nextCart);
+    localStorage.setItem("zantustoCart", JSON.stringify(nextCart));
+  };
+  const updateQuantity = (id, change) => saveCart(cart.map((item) => item.id === id ? { ...item, quantity: item.quantity + change } : item).filter((item) => item.quantity > 0));
+  const submitSearch = (event) => {
+    event.preventDefault();
+    const value = searchQuery.trim();
+    navigate(value ? `/products?search=${encodeURIComponent(value)}` : "/products");
+    setActivePanel(null);
   };
 
   useEffect(() => {
@@ -123,6 +135,12 @@ const Header = () => {
     setIsProductsMenuOpen(false);
   }, [location.pathname, location.search]);
 
+  useEffect(() => {
+    const refreshCart = () => setCart(JSON.parse(localStorage.getItem("zantustoCart") || "[]"));
+    window.addEventListener("zantusto-cart-updated", refreshCart);
+    return () => window.removeEventListener("zantusto-cart-updated", refreshCart);
+  }, []);
+
   return (
     <header className={styles.header}>
       <div className={styles.topBar}>
@@ -136,16 +154,23 @@ const Header = () => {
 
         <div className={styles.topActionsGroup}>
           <div className={styles.iconActions}>
-            <button className={styles.iconBtn} aria-label="Tìm kiếm">
+            <button className={styles.iconBtn} onClick={() => setActivePanel(activePanel === "search" ? null : "search")} aria-label="Tìm kiếm">
               <Search size={22} strokeWidth={1.5} />
             </button>
-            <button className={styles.iconBtn} aria-label="Giỏ hàng">
+            {activePanel === "search" && <form className={styles.searchExpand} onSubmit={submitSearch}><input autoFocus value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Tìm sản phẩm..." /><button type="submit">Tìm</button></form>}
+            <button className={styles.iconBtn} onClick={() => setActivePanel(activePanel === "cart" ? null : "cart")} aria-label="Giỏ hàng">
               <ShoppingCart size={22} strokeWidth={1.5} />
+              {cart.length > 0 && <span className={styles.counter}>{cart.reduce((sum, item) => sum + item.quantity, 0)}</span>}
             </button>
-            <button className={styles.iconBtn} aria-label="Thông báo">
+            <button className={styles.iconBtn} onClick={() => setActivePanel(activePanel === "notifications" ? null : "notifications")} aria-label="Thông báo">
               <Bell size={22} strokeWidth={1.5} />
             </button>
           </div>
+          {activePanel && activePanel !== "search" && <div className={styles.actionPanel}>
+            <button className={styles.panelClose} onClick={() => setActivePanel(null)} aria-label="Đóng"><X size={17} /></button>
+            {activePanel === "notifications" && <><strong>Thông báo</strong><p className={styles.notice}>Ưu đãi mới đang chờ bạn tại trang Khuyến mãi.</p><p className={styles.notice}>Sản phẩm yêu thích đã có sẵn để bạn khám phá.</p></>}
+            {activePanel === "cart" && <><strong>Giỏ hàng ({cart.reduce((sum, item) => sum + item.quantity, 0)})</strong>{cart.length === 0 ? <p className={styles.empty}>Giỏ hàng của bạn đang trống.</p> : <><div className={styles.cartItems}>{cart.map((item) => <div className={styles.cartItem} key={item.id}><img src={item.image} alt="" /><div><b>{item.name}</b><small>{item.price}</small><span><button onClick={() => updateQuantity(item.id, -1)}><Minus size={13} /></button>{item.quantity}<button onClick={() => updateQuantity(item.id, 1)}><Plus size={13} /></button></span></div><button className={styles.removeItem} onClick={() => saveCart(cart.filter((cartItem) => cartItem.id !== item.id))}><Trash2 size={15} /></button></div>)}</div><button className={styles.checkout} onClick={() => alert("Chức năng thanh toán sẽ được cập nhật sớm.")}>Tiến hành thanh toán</button></>}</>}
+          </div>}
 
           <div className={styles.authActions}>
             {user ? (
@@ -217,12 +242,9 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              <button
-                className={styles.authBtn}
-                onClick={() => openAuthModal("login")}
-              >
+              <NavLink className={styles.authBtn} to="/auth?mode=login">
                 Đăng Nhập / Đăng Ký
-              </button>
+              </NavLink>
             )}
           </div>
         </div>
@@ -294,12 +316,6 @@ const Header = () => {
         )}
       </nav>
 
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        initialMode={authMode}
-        onLoginSuccess={handleLoginSuccess}
-      />
       <ProfileModal
         isOpen={isProfileModalOpen}
         onClose={() => setIsProfileModalOpen(false)}

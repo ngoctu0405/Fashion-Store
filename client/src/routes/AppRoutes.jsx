@@ -11,6 +11,8 @@ import SetDo from "../pages/Products/SetDo";
 import PhuKien from "../pages/Products/PhuKien";
 import Promotions from "../pages/Promotions/Promotions";
 import Policies from "../pages/Policies/Policies";
+import Auth from "../pages/Auth/Auth";
+import ProductDetail from "../pages/ProductDetail/ProductDetail";
 
 function AppRoutes() {
   return (
@@ -79,6 +81,15 @@ function AppRoutes() {
         element={
           <MainLayout>
             <Promotions />
+          </MainLayout>
+        }
+      />
+      <Route path="/products/:productId" element={<MainLayout><ProductDetail /></MainLayout>} />
+      <Route
+        path="/auth"
+        element={
+          <MainLayout>
+            <Auth />
           </MainLayout>
         }
       />

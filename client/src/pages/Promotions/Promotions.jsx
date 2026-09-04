@@ -147,7 +147,7 @@ function Promotions() {
 
       <section className={styles.finalCta}>
         <p className={styles.eyebrow}>Cập nhật ưu đãi</p>
-        <h2>
+        <h2 class="slogan">
           Theo dõi ZANTUSTO để không bỏ lỡ
           <br />
           những ưu đãi mới nhất.

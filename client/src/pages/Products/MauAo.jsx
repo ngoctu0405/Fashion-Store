@@ -1,7 +1,7 @@
-import styles from "./Products.module.css";
+import Products from "./Products";
 
 function MauAo() {
-  return <h1 className={styles.title}>Mẫu Áo</h1>;
+  return <Products />;
 }
 
 export default MauAo;

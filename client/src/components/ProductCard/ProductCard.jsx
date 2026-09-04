@@ -1,4 +1,5 @@
-import { ArrowRight, Heart, ShoppingBag } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import styles from "./ProductCard.module.css";
 
 function ProductCard({ product }) {
@@ -14,8 +15,7 @@ function ProductCard({ product }) {
         <h3>{product.name}</h3>
         <div className={styles.priceRow}><strong>{product.price}</strong>{product.oldPrice && <del>{product.oldPrice}</del>}</div>
         <div className={styles.actions}>
-          <button className={styles.buyButton} type="button"><ShoppingBag size={16} /> Mua ngay</button>
-          <button className={styles.detailButton} type="button">Chi tiết <ArrowRight size={16} /></button>
+          <Link className={styles.detailButton} to={`/products/${product.id}`}>Chi tiết <ArrowRight size={16} /></Link>
         </div>
       </div>
     </article>

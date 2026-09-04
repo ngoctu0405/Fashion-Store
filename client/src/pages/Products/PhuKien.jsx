@@ -1,7 +1,7 @@
-import styles from "./Products.module.css";
+import Products from "./Products";
 
 function PhuKien() {
-  return <h1 className={styles.title}>Phụ Kiện</h1>;
+  return <Products />;
 }
 
 export default PhuKien;

@@ -1,7 +1,7 @@
-import styles from "./Products.module.css";
+import Products from "./Products";
 
 function SetDo() {
-  return <h1 className={styles.title}>Set Đồ</h1>;
+  return <Products />;
 }
 
 export default SetDo;

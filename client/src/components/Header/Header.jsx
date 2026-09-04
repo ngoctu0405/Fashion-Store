@@ -218,20 +218,12 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              <>
-                <button
-                  className={styles.authBtn}
-                  onClick={() => openAuthModal("login")}
-                >
-                  Đăng Nhập
-                </button>
-                <button
-                  className={styles.authBtn}
-                  onClick={() => openAuthModal("register")}
-                >
-                  Đăng Ký
-                </button>
-              </>
+              <button
+                className={styles.authBtn}
+                onClick={() => openAuthModal("login")}
+              >
+                Đăng Nhập / Đăng Ký
+              </button>
             )}
           </div>
         </div>

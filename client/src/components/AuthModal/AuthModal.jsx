@@ -1,95 +1,107 @@
-import styles from './AuthModal.module.css';
 import { useState, useEffect } from 'react';
+import styles from './AuthModal.module.css';
 
 const EyeIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-    <circle cx="12" cy="12" r="3"></circle>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+    <circle cx="12" cy="12" r="3" />
   </svg>
 );
 
 const EyeOffIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-    <line x1="1" y1="1" x2="23" y2="23"></line>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+    <line x1="1" y1="1" x2="23" y2="23" />
   </svg>
 );
+
+const INITIAL_FORM_DATA = {
+  fullName: '',
+  email: '',
+  username: '',
+  password: '',
+  confirmPassword: '',
+  phone: '',
+  birthday: '',
+  gender: '',
+  terms: false,
+};
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_REGEX = /(84|0[35789])\d{8}$/;
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
 
 const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) => {
   const [mode, setMode] = useState(initialMode);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState('');
 
   useEffect(() => {
     if (isOpen) {
       setMode(initialMode);
       setShowPassword(false);
       setShowConfirmPassword(false);
-      setFormData({
-        fullName: '',
-        email: '',
-        username: '',
-        password: '',
-        confirmPassword: '',
-        phone: '',
-        birthday: '',
-        gender: '',
-        terms: false
-      });
+      setFormData(INITIAL_FORM_DATA);
       setErrors({});
       setTouched({});
+      setApiError('');
     }
   }, [isOpen, initialMode]);
 
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    username: '',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-    birthday: '',
-    gender: '',
-    terms: false
-  });
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [apiError, setApiError] = useState('');
-
   if (!isOpen) return null;
 
-  const validateField = (name, value) => {
+  const handleModeSwitch = (newMode) => {
+    setMode(newMode);
+    setErrors({});
+    setTouched({});
+    setApiError('');
+  };
+
+  const validateField = (name, value, currentMode = mode) => {
     let error = '';
     switch (name) {
       case 'fullName':
         if (!value.trim()) error = 'Họ và tên không được để trống';
         break;
       case 'email':
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) error = 'Email không đúng định dạng';
+        if (!value.trim()) {
+          error = 'Email không được để trống';
+        } else if (!EMAIL_REGEX.test(value)) {
+          error = 'Email không đúng định dạng';
+        }
         break;
       case 'username':
-        if (value.length < 4) error = 'Tên đăng nhập phải có ít nhất 4 ký tự';
+        if (!value.trim()) {
+          error = 'Tên đăng nhập không được để trống';
+        } else if (value.length < 4) {
+          error = 'Tên đăng nhập phải có ít nhất 4 ký tự';
+        }
         break;
       case 'password':
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
         if (!value) {
           error = 'Mật khẩu không được để trống';
-        } else if (value.length < 8) {
-          error = 'Mật khẩu phải có ít nhất 8 ký tự';
-        } else if (!passwordRegex.test(value)) {
-          error = 'Mật khẩu phải bao gồm cả chữ và số';
+        } else if (currentMode === 'register') {
+          if (value.length < 8) {
+            error = 'Mật khẩu phải có ít nhất 8 ký tự';
+          } else if (!PASSWORD_REGEX.test(value)) {
+            error = 'Mật khẩu phải bao gồm cả chữ và số';
+          }
         }
         break;
       case 'confirmPassword':
-        if (value !== formData.password) error = 'Mật khẩu xác nhận không khớp';
+        if (value !== formData.password) {
+          error = 'Mật khẩu xác nhận không khớp';
+        }
         break;
       case 'phone':
-        const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
         if (!value.trim()) {
           error = 'Số điện thoại không được để trống';
-        } else if (!phoneRegex.test(value)) {
+        } else if (!PHONE_REGEX.test(value)) {
           error = 'Số điện thoại không hợp lệ';
         }
         break;
@@ -101,20 +113,21 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
-    setTouched({ ...touched, [name]: true });
+    setTouched((prev) => ({ ...prev, [name]: true }));
     const error = validateField(name, value);
-    setErrors({ ...errors, [name]: error });
+    setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const val = type === 'checkbox' ? checked : value;
-    setFormData({ ...formData, [name]: val });
-    setApiError(''); // Clear API error on change
     
+    setFormData((prev) => ({ ...prev, [name]: val }));
+    setApiError('');
+
     if (touched[name]) {
       const error = validateField(name, val);
-      setErrors({ ...errors, [name]: error });
+      setErrors((prev) => ({ ...prev, [name]: error }));
     }
   };
 
@@ -123,24 +136,27 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
     setIsLoading(true);
     setApiError('');
 
-    // Final validation
-    const newErrors = {};
     const fieldsToValidate = mode === 'register' 
       ? ['fullName', 'email', 'username', 'password', 'confirmPassword', 'phone'] 
       : ['email', 'password'];
-    
-    fieldsToValidate.forEach(field => {
-      const error = validateField(field, formData[field]);
+
+    const newErrors = {};
+    const newTouched = {};
+
+    fieldsToValidate.forEach((field) => {
+      newTouched[field] = true;
+      const error = validateField(field, formData[field], mode);
       if (error) newErrors[field] = error;
     });
 
     if (mode === 'register' && !formData.terms) {
       newErrors.terms = 'Bạn phải đồng ý với điều khoản sử dụng';
+      newTouched.terms = true;
     }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      setTouched(fieldsToValidate.reduce((acc, f) => ({ ...acc, [f]: true }), {}));
+      setTouched(newTouched);
       setIsLoading(false);
       return;
     }
@@ -164,7 +180,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
       if (onLoginSuccess) {
         onLoginSuccess({
           name: data.user.name || data.user.fullName,
-          email: data.user.email
+          email: data.user.email,
         });
       }
       onClose();
@@ -178,18 +194,20 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
   return (
     <div className={styles.backdrop} onClick={onClose}>
       <div className={`${styles.modal} ${mode === 'login' ? styles.loginModal : ''}`} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeBtn} onClick={onClose}>&times;</button>
+        <button className={styles.closeBtn} onClick={onClose} aria-label="Đóng">&times;</button>
         
         <div className={styles.headerTabs}>
           <button 
+            type="button"
             className={`${styles.tab} ${mode === 'login' ? styles.activeTab : ''}`}
-            onClick={() => setMode('login')}
+            onClick={() => handleModeSwitch('login')}
           >
             Đăng Nhập
           </button>
           <button 
+            type="button"
             className={`${styles.tab} ${mode === 'register' ? styles.activeTab : ''}`}
-            onClick={() => setMode('register')}
+            onClick={() => handleModeSwitch('register')}
           >
             Đăng Ký
           </button>
@@ -211,8 +229,9 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
             <div className={`${styles.formGrid} ${mode === 'login' ? styles.loginGrid : ''}`}>
               {mode === 'register' && (
                 <div className={styles.inputGroup}>
-                  <label>Họ và Tên <span className={styles.required}>*</span></label>
+                  <label htmlFor="fullName">Họ và Tên <span className={styles.required}>*</span></label>
                   <input 
+                    id="fullName"
                     type="text" 
                     name="fullName"
                     placeholder="Nhập họ và tên" 
@@ -226,8 +245,9 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
               )}
 
               <div className={styles.inputGroup}>
-                <label>Email <span className={styles.required}>*</span></label>
+                <label htmlFor="email">Email <span className={styles.required}>*</span></label>
                 <input 
+                  id="email"
                   type="email" 
                   name="email"
                   placeholder="example@gmail.com" 
@@ -241,8 +261,9 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
 
               {mode === 'register' && (
                 <div className={styles.inputGroup}>
-                  <label>Tên đăng nhập <span className={styles.required}>*</span></label>
+                  <label htmlFor="username">Tên đăng nhập <span className={styles.required}>*</span></label>
                   <input 
+                    id="username"
                     type="text" 
                     name="username"
                     placeholder="Tối thiểu 4 ký tự" 
@@ -256,9 +277,10 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
               )}
 
               <div className={styles.inputGroup}>
-                <label>Mật khẩu <span className={styles.required}>*</span></label>
+                <label htmlFor="password">Mật khẩu <span className={styles.required}>*</span></label>
                 <div className={styles.passwordWrapper}>
                   <input 
+                    id="password"
                     type={showPassword ? "text" : "password"} 
                     name="password"
                     placeholder="Tối thiểu 8 ký tự, gồm chữ và số" 
@@ -272,6 +294,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
                     className={styles.toggleBtn}
                     onClick={() => setShowPassword(!showPassword)}
                     disabled={isLoading}
+                    aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                   >
                     {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                   </button>
@@ -282,9 +305,10 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
               {mode === 'register' && (
                 <>
                   <div className={styles.inputGroup}>
-                    <label>Xác nhận mật khẩu <span className={styles.required}>*</span></label>
+                    <label htmlFor="confirmPassword">Xác nhận mật khẩu <span className={styles.required}>*</span></label>
                     <div className={styles.passwordWrapper}>
                       <input 
+                        id="confirmPassword"
                         type={showConfirmPassword ? "text" : "password"} 
                         name="confirmPassword"
                         placeholder="Nhập lại mật khẩu" 
@@ -298,6 +322,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
                         className={styles.toggleBtn}
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         disabled={isLoading}
+                        aria-label={showConfirmPassword ? "Ẩn xác nhận mật khẩu" : "Hiện xác nhận mật khẩu"}
                       >
                         {showConfirmPassword ? <EyeOffIcon /> : <EyeIcon />}
                       </button>
@@ -306,8 +331,9 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
                   </div>
 
                   <div className={styles.inputGroup}>
-                    <label>Số điện thoại <span className={styles.required}>*</span></label>
+                    <label htmlFor="phone">Số điện thoại <span className={styles.required}>*</span></label>
                     <input 
+                      id="phone"
                       type="tel" 
                       name="phone"
                       placeholder="09xxxxxxxx" 
@@ -320,8 +346,9 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
                   </div>
 
                   <div className={styles.inputGroup}>
-                    <label>Ngày sinh (tuỳ chọn)</label>
+                    <label htmlFor="birthday">Ngày sinh (tuỳ chọn)</label>
                     <input 
+                      id="birthday"
                       type="date" 
                       name="birthday"
                       value={formData.birthday}
@@ -365,9 +392,9 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
 
             <p className={styles.footer}>
               {mode === 'login' ? (
-                <>Bạn chưa có tài khoản? <span onClick={() => setMode('register')}>Đăng ký ngay</span></>
+                <>Bạn chưa có tài khoản? <span role="button" tabIndex={0} onClick={() => handleModeSwitch('register')}>Đăng ký ngay</span></>
               ) : (
-                <>Bạn đã có tài khoản? <span onClick={() => setMode('login')}>Đăng nhập</span></>
+                <>Bạn đã có tài khoản? <span role="button" tabIndex={0} onClick={() => handleModeSwitch('login')}>Đăng nhập</span></>
               )}
             </p>
           </form>

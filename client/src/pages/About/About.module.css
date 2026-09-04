@@ -1,16 +1,16 @@
-.container { overflow: hidden; background: #f7f9fc; color: #172033; font-family: Arial, Helvetica, sans-serif; }
+.container { overflow: hidden; background: #f7f9fc; color: #172033; font-family: "Be Vietnam Pro"; }
 
 .zantustoIntroContainer { position: relative; isolation: isolate; overflow: hidden; padding: clamp(64px, 8vw, 108px) 20px; background: radial-gradient(circle at 50% -25%, #1d4ed8 0%, #0b1933 38%, #060b13 72%); color: #fff; text-align: center; }
 .zantustoIntroContainer::before, .zantustoIntroContainer::after { position: absolute; z-index: -1; width: 300px; height: 300px; border-radius: 50%; background: rgba(96, 165, 250, .13); content: ""; filter: blur(4px); }
 .zantustoIntroContainer::before { top: -155px; left: -95px; }
 .zantustoIntroContainer::after { right: -115px; bottom: -200px; }
 
-.zantustoTagline, .sectionEyebrow { margin: 0 0 13px; color: #60a5fa; font-size: 12px; font-weight: 800; letter-spacing: 2px; line-height: 1.3; text-transform: uppercase; }
+.zantustoTagline, .sectionEyebrow { margin: 0 0 13px; color: #60a5fa; font-size: 13.2px; font-weight: 800; letter-spacing: 2px; line-height: 1.3; text-transform: uppercase; }
 .zantustoIntroText { max-width: 900px; margin: 0 auto 22px; color: #e8eefb; font-size: clamp(20px, 2.35vw, 30px); font-weight: 400; line-height: 1.58; }
 .brandName { color: #fff; font-weight: 850; letter-spacing: 1.5px; text-shadow: 0 0 22px rgba(96, 165, 250, .52); }
 .accentLine { width: 66px; height: 4px; margin: 0 auto; border-radius: 99px; background: linear-gradient(90deg, #60a5fa, #fff, #60a5fa); }
 
-.shopLink, .ctaButton { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border-radius: 999px; font-size: 14px; font-weight: 800; text-decoration: none; transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+.shopLink, .ctaButton { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border-radius: 999px; font-size: 15.4px; font-weight: 800; text-decoration: none; transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
 .shopLink { margin-top: 31px; padding: 13px 22px; border: 1px solid rgba(191, 219, 254, .75); background: rgba(255, 255, 255, .08); color: #fff; box-shadow: 0 12px 26px rgba(0, 0, 0, .16); }
 .shopLink:hover { background: #2563eb; color: #fff; transform: translateY(-3px); box-shadow: 0 18px 32px rgba(37, 99, 235, .32); }
 
@@ -20,7 +20,7 @@
 .highlightCard:hover { border-color: #93c5fd; transform: translateY(-7px); box-shadow: 0 20px 42px rgba(15, 23, 42, .13); }
 .highlightCard:hover::after { transform: scale(1.35); }
 .highlightCard svg { position: relative; z-index: 1; box-sizing: content-box; padding: 10px; width: 26px; height: 26px; border-radius: 14px; color: #2563eb; background: #dbeafe; }
-.highlightCard h3 { position: relative; z-index: 1; margin: 20px 0 9px; color: #0f172a; font-size: 20px; }
+.highlightCard h3 { position: relative; z-index: 1; margin: 20px 0 9px; color: #0f172a; font-size: 22px; }
 .highlightCard p { position: relative; z-index: 1; margin: 0; color: #64748b; line-height: 1.7; }
 
 .promise { display: flex; align-items: flex-start; gap: 24px; max-width: 1080px; margin: 0 auto 84px; padding: 40px; border: 1px solid #dbeafe; border-radius: 22px; background: linear-gradient(115deg, #eff6ff, #f8fbff 60%, #e0edff); }
@@ -35,8 +35,8 @@
 .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; max-width: 1080px; margin: 0 auto; padding: 0; list-style: none; }
 .steps li { position: relative; padding: 26px 24px 20px; border-top: 1px solid #cbd5e1; }
 .steps li::before { position: absolute; top: -5px; left: 0; width: 62px; height: 4px; border-radius: 99px; background: #2563eb; content: ""; }
-.steps span { color: #2563eb; font-size: 13px; font-weight: 850; letter-spacing: 1.5px; }
-.steps h3 { margin: 12px 0 9px; color: #0f172a; font-size: 21px; }
+.steps span { color: #2563eb; font-size: 14.3px; font-weight: 850; letter-spacing: 1.5px; }
+.steps h3 { margin: 12px 0 9px; color: #0f172a; font-size: 23.1px; }
 .steps p { margin: 0; color: #64748b; line-height: 1.7; }
 
 .closingCta { position: relative; overflow: hidden; padding: clamp(70px, 9vw, 110px) 20px; background: radial-gradient(circle at 50% 0%, #2563eb, #101b3c 54%, #080e1d); color: #fff; text-align: center; }
@@ -50,8 +50,8 @@
 
 @media (max-width: 768px) {
   .zantustoIntroContainer { padding: 62px 18px; }
-  .zantustoTagline, .sectionEyebrow { font-size: 10px; letter-spacing: 1.7px; }
-  .zantustoIntroText { font-size: 19px; }
+  .zantustoTagline, .sectionEyebrow { font-size: 11px; letter-spacing: 1.7px; }
+  .zantustoIntroText { font-size: 20.9px; }
   .highlights { grid-template-columns: 1fr; gap: 16px; padding: 48px 18px; }
   .highlightCard { padding: 26px 24px; }
   .promise { margin: 0 18px 56px; padding: 27px 22px; gap: 16px; border-radius: 18px; }
@@ -60,4 +60,12 @@
   .steps { grid-template-columns: 1fr; gap: 24px; }
   .steps li { padding: 22px 12px 8px; }
   .closingCta { padding: 68px 18px; }
+}
+
+@media (min-width: 769px) and (max-width: 980px) {
+  .highlights { grid-template-columns: repeat(2, 1fr); }
+  .highlightCard:last-child { grid-column: 1 / -1; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .steps li:last-child { grid-column: 1 / -1; }
+  .promise { margin-left: 24px; margin-right: 24px; }
 }

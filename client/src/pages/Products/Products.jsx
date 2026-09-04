@@ -99,7 +99,7 @@ function Products() {
           <h2>Phong cách của bạn bắt đầu từ một lựa chọn nhỏ.</h2>
         </div>
         <Link to="/about">
-          Câu chuyện Zantusto <ArrowRight size={18} />
+          Câu chuyện ZANTUSTO <ArrowRight size={18} />
         </Link>
       </section>
     </main>

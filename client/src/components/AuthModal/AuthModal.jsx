@@ -220,7 +220,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login', onLoginSuccess }) =
           <p className={styles.subtitle}>
             {mode === 'login' 
               ? 'Nhập thông tin để tiếp tục' 
-              : 'Trở thành thành viên để nhận ưu đãi'}
+              : 'Tạo tài khoản để nhận ưu đãi'}
           </p>
           
           {apiError && <div className={styles.apiError}>{apiError}</div>}

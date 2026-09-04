@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap");
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -11,11 +13,11 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: Arial, Helvetica, sans-serif;
-  --heading: Arial, Helvetica, sans-serif;
-  --mono: Arial, Helvetica, sans-serif;
+  --sans: "Be Vietnam Pro";
+  --heading: "Be Vietnam Pro";
+  --mono: "Be Vietnam Pro";
 
-  font: 18px/145% var(--sans);
+  font: 20px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light;
   color: var(--text);
@@ -26,12 +28,33 @@
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
 body {
   margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  font-family: "Be Vietnam Pro";
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: "Be Vietnam Pro";
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg {
+  max-width: 100%;
 }
 
 #root {
@@ -52,21 +75,21 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
+  font-size: 61.6px;
   letter-spacing: -1.68px;
   margin: 32px 0;
   @media (max-width: 1024px) {
-    font-size: 36px;
+    font-size: 39.6px;
     margin: 20px 0;
   }
 }
 h2 {
-  font-size: 24px;
+  font-size: 26.4px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
   @media (max-width: 1024px) {
-    font-size: 20px;
+    font-size: 22px;
   }
 }
 p {
@@ -82,7 +105,7 @@ code,
 }
 
 code {
-  font-size: 15px;
+  font-size: 16.5px;
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);

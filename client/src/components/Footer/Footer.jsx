@@ -23,10 +23,6 @@ function Footer() {
             </li>
 
             <li>
-              <Link to="/membership-policy">Chính sách Membership</Link>
-            </li>
-
-            <li>
               <Link to="/privacy-policy">Chính sách bảo mật</Link>
             </li>
 
@@ -44,8 +40,6 @@ function Footer() {
             <a href="#">Zalo</a>
             <a href="#">Facebook</a>
             <a href="#">Instagram</a>
-            <a href="#">Youtube</a>
-            <a href="#">Tiktok</a>
           </div>
         </div>
       </div>

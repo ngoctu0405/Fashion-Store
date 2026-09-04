@@ -12,15 +12,6 @@ const policies = {
       ["Bảo hành", ["Các lỗi do sản xuất được tiếp nhận kiểm tra trong 30 ngày kể từ ngày nhận hàng.", "Chính sách không áp dụng cho hao mòn tự nhiên, bảo quản không đúng cách hoặc tác động từ bên ngoài."]],
     ],
   },
-  "/membership-policy": {
-    title: "Chính sách Membership",
-    intro: "Chương trình thành viên ZANTUSTO được xây dựng để ghi nhận sự đồng hành và mang đến các ưu đãi phù hợp cho khách hàng thân thiết.",
-    sections: [
-      ["Tích điểm", ["Khách hàng có thể tích điểm cho các đơn hàng hợp lệ sau khi hoàn tất thanh toán.", "Điểm được ghi nhận theo giá trị thực tế của đơn hàng, sau khi trừ ưu đãi và phí vận chuyển.", "Điểm không có giá trị quy đổi thành tiền mặt."]],
-      ["Ưu đãi thành viên", ["Thành viên được nhận ưu đãi sinh nhật, thông tin bộ sưu tập và chương trình riêng tùy từng thời điểm.", "Ưu đãi chỉ áp dụng cho tài khoản đã cung cấp thông tin chính xác và còn hoạt động."]],
-      ["Lưu ý", ["ZANTUSTO có thể điều chỉnh điều kiện, quà tặng hoặc thời hạn điểm; thông báo sẽ được cập nhật trên các kênh chính thức.", "Tài khoản không được chuyển nhượng hoặc dùng chung cho nhiều người."]],
-    ],
-  },
   "/privacy-policy": {
     title: "Chính sách bảo mật",
     intro: "ZANTUSTO tôn trọng quyền riêng tư và cam kết bảo vệ thông tin cá nhân mà bạn cung cấp trong quá trình mua sắm.",

@@ -55,7 +55,7 @@ function Home() {
               Khám phá ngay <ArrowRight size={18} />
             </Link>
             <Link className={styles.textButton} to="/about">
-              Câu chuyện Zantusto <ArrowUpRight size={17} />
+              Câu chuyện ZANTUSTO <ArrowUpRight size={17} />
             </Link>
           </div>
           <div className={styles.heroNote}>
@@ -69,15 +69,15 @@ function Home() {
         </div>
         <div className={styles.heroVisual}>
           <div className={styles.visualGlow} />
-          <img src={bannerStyle} alt="Bộ sưu tập phụ kiện Zantusto" />
+          <img src={bannerStyle} alt="Bộ sưu tập phụ kiện ZANTUSTO" />
           <div className={styles.floatingCard}>
             <span>
               <Star size={14} fill="currentColor" /> Phong cách được yêu thích
             </span>
             <strong>
-              New season
+              Điểm nhấn
               <br />
-              essentials
+              mùa mới
             </strong>
           </div>
         </div>
@@ -112,14 +112,14 @@ function Home() {
             className={styles.menCard}
             image={bannerMen}
             alt="Phong cách thời trang nam"
-            label="01 / For him"
+            label="01 / Dành cho nam"
             title="Phong cách nam"
           />
           <Collection
             className={styles.featureCard}
             image={bannerStyle}
-            alt="Phụ kiện phong cách Zantusto"
-            label="02 / The edit"
+            alt="Phụ kiện phong cách ZANTUSTO"
+            label="02 / Tuyển chọn"
             title={
               <>
                 Phụ kiện
@@ -132,7 +132,7 @@ function Home() {
             className={styles.womenCard}
             image={bannerWomen}
             alt="Phong cách thời trang nữ"
-            label="03 / For her"
+            label="03 / Dành cho nữ"
             title="Phong cách nữ"
           />
         </div>
@@ -142,21 +142,21 @@ function Home() {
         <div className={styles.statementMark}>
           <Gem aria-hidden="true" />
         </div>
-        <p className={styles.eyebrow}>Zantusto philosophy</p>
+        <p className={styles.eyebrow}>Triết lý ZANTUSTO</p>
         <h2>
           “Phụ kiện không chỉ hoàn thiện một bộ trang phục. Chúng làm rõ con
           người bạn muốn trở thành.”
         </h2>
         <Link to="/about">
-          Tìm hiểu về Zantusto <ArrowRight size={17} />
+          Tìm hiểu về ZANTUSTO <ArrowRight size={17} />
         </Link>
       </section>
 
       <section className={styles.editorial}>
         <div className={styles.editorialImage}>
-          <img src={bannerWomen} alt="Thời trang nữ Zantusto" />
+          <img src={bannerWomen} alt="Thời trang nữ ZANTUSTO" />
           <span>
-            LOOKBOOK
+            BỘ ẢNH PHONG CÁCH
             <br />
             2026
           </span>

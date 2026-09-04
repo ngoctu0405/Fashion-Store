@@ -1,0 +1,436 @@
+.page {
+  overflow: hidden;
+  background: #f7f9fc;
+  color: #162845;
+  font-family: "Be Vietnam Pro";
+}
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(90px, 12vw, 150px) 22px;
+  background:
+    radial-gradient(circle at 18% 4%, #1d56af 0, transparent 30%),
+    radial-gradient(circle at 85% 100%, #15478e 0, transparent 34%), #001a57;
+  color: #fff;
+  text-align: center;
+}
+.hero::before,
+.hero::after {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  content: "";
+}
+.hero::before {
+  top: -280px;
+  left: -160px;
+  width: 580px;
+  height: 580px;
+}
+.hero::after {
+  right: -160px;
+  bottom: -300px;
+  width: 640px;
+  height: 640px;
+}
+.heroInner {
+  position: relative;
+  max-width: 830px;
+  margin: 0 auto;
+}
+.hero p,
+.eyebrow {
+  margin: 0 0 14px;
+  color: #9fc1ff;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+.hero p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.hero h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(42px, 6vw, 76px);
+  letter-spacing: -2.8px;
+  line-height: 1.02;
+}
+.hero h1 em {
+  color: #b9d2ff;
+  font-style: normal;
+}
+.heroInner > span {
+  display: block;
+  max-width: 610px;
+  margin: 23px auto 0;
+  color: #d7e5ff;
+  font-size: 19.8px;
+  line-height: 1.7;
+}
+.hero a,
+.finalCta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 14px 21px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 99px;
+  color: #fff;
+  font-size: 15.4px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+.hero a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+.intro {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 0 48px;
+  text-align: center;
+}
+.intro .eyebrow,
+.howHeading .eyebrow {
+  color: #1d56af;
+}
+.intro h2,
+.groupHeader h2,
+.howHeading h2,
+.rules h2 {
+  margin: 0;
+  color: #122747;
+  font-size: clamp(29px, 4vw, 48px);
+  letter-spacing: -1.2px;
+  line-height: 1.15;
+}
+.intro > p:last-child {
+  margin: 18px auto 0;
+  color: #5a6d88;
+  font-size: 23.1px;
+  line-height: 1.7;
+}
+.groups,
+.voucherInner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 22px 100px;
+}
+.groupHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 800px;
+  margin-bottom: 32px;
+}
+.groupHeader .eyebrow {
+  color: #1d56af;
+}
+.groupHeader h2 {
+  font-size: clamp(25px, 3vw, 36px);
+}
+.groupHeader span {
+  display: block;
+  margin-top: 11px;
+  color: #60728c;
+  line-height: 1.6;
+}
+.groupIcon {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 15px;
+  background: #e2edff;
+  color: #174e9f;
+}
+.voucherGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.voucherCard {
+  position: relative;
+  padding: 28px;
+  overflow: hidden;
+  border: 1px solid #d5e2f4;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(15, 48, 92, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.voucherCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 38px rgba(15, 48, 92, 0.12);
+}
+.voucherTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #1a56ad;
+}
+.voucherTop span {
+  padding: 7px 10px;
+  border-radius: 5px;
+  background: #e6f0ff;
+  font-size: 13.2px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+.voucherTop svg {
+  color: #7798c8;
+}
+.voucherCard h3 {
+  margin: 23px 0 9px;
+  color: #162845;
+  font-size: 29.7px;
+}
+.voucherCard > p {
+  min-height: 48px;
+  margin: 0;
+  color: #60728c;
+  font-size: 20.9px;
+  line-height: 1.6;
+}
+.voucherCondition {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+  color: #305378;
+  font-size: 16.5px;
+}
+.voucherCondition svg {
+  color: #1a56ad;
+}
+.codeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 13px 0 0;
+  border-top: 1px dashed #cbd9ed;
+}
+.codeRow small,
+.codeRow strong {
+  display: block;
+}
+.codeRow small {
+  color: #8191a7;
+  font-size: 12.1px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.codeRow strong {
+  margin-top: 3px;
+  color: #163e7e;
+  font-size: 18.7px;
+  letter-spacing: 1px;
+}
+.codeRow button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 11px;
+  border: 1px solid #1c56ad;
+  border-radius: 8px;
+  background: #fff;
+  color: #174e9f;
+  font-family: inherit;
+  font-size: 15.4px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.codeRow button:hover {
+  background: #eaf2ff;
+}
+.voucherSection {
+  padding: 92px 0;
+  background: linear-gradient(135deg, #001a57, #082c6c);
+  color: #fff;
+}
+.voucherSection .voucherInner {
+  padding-top: 0;
+}
+.voucherSection .intro .eyebrow {
+  color: #a9c9ff;
+}
+.voucherSection .intro > p:last-child {
+  color: #d7e5ff;
+}
+.voucherSection .voucherCard {
+  border-color: rgba(185, 211, 255, 0.33);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.99), #edf4ff);
+}
+.voucherSection .voucherTop span {
+  background: #d5e6ff;
+  color: #123f84;
+}
+.howTo {
+  padding: 105px 22px;
+  background: #fff;
+}
+.howHeading {
+  max-width: 640px;
+  margin: 0 auto 44px;
+  text-align: center;
+}
+.stepGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.stepGrid article {
+  position: relative;
+  padding: 30px 25px;
+  border-top: 3px solid #1a56ad;
+  background: #f4f8ff;
+}
+.stepGrid article > span {
+  position: absolute;
+  top: 25px;
+  right: 24px;
+  color: #a5bee4;
+  font-size: 14.3px;
+  font-weight: 800;
+}
+.stepGrid svg {
+  color: #1b56ad;
+}
+.stepGrid h3 {
+  margin: 21px 0 9px;
+  color: #182c4e;
+  font-size: 23.1px;
+}
+.stepGrid p {
+  margin: 0;
+  color: #60728c;
+  line-height: 1.65;
+}
+.rules {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 65px;
+  max-width: 1080px;
+  margin: 90px auto;
+  padding: 44px;
+  border-left: 4px solid #001a57;
+  border-radius: 0 18px 18px 0;
+  background: #eaf2ff;
+}
+.rules .eyebrow {
+  color: #1a56ad;
+}
+.rules h2 {
+  font-size: 34.1px;
+}
+.rules ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #4f6380;
+  line-height: 1.8;
+}
+.rules li + li {
+  margin-top: 8px;
+}
+.finalCta {
+  padding: 105px 20px;
+  background: #001a57;
+  color: #fff;
+  text-align: center;
+}
+.finalCta .eyebrow {
+  color: #9fc1ff;
+}
+.finalCta h2 {
+  margin: 0;
+  font-size: clamp(31px, 4vw, 53px);
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+}
+.finalCta a {
+  background: #fff;
+  color: #001a57;
+  border-color: #fff;
+}
+.finalCta a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 13px 23px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 760px) {
+  .intro {
+    padding: 0 0 36px;
+  }
+  .groups,
+  .voucherInner {
+    padding: 0 18px 65px;
+  }
+  .voucherSection {
+    padding: 65px 0;
+  }
+  .voucherGrid,
+  .stepGrid,
+  .rules {
+    grid-template-columns: 1fr;
+  }
+  .voucherCard {
+    padding: 23px;
+  }
+  .howTo {
+    padding: 70px 18px;
+  }
+  .rules {
+    gap: 25px;
+    margin: 58px 18px;
+    padding: 30px 24px;
+  }
+  .finalCta {
+    padding: 75px 18px;
+  }
+}
+
+@media (max-width: 450px) {
+  .hero {
+    padding: 75px 18px;
+  }
+  .hero h1 {
+    font-size: 46.2px;
+  }
+  .heroInner > span,
+  .intro > p:last-child {
+    font-size: 18.7px;
+  }
+  .groupHeader {
+    gap: 14px;
+  }
+  .groupIcon {
+    width: 43px;
+    height: 43px;
+  }
+  .voucherCard h3 {
+    font-size: 24.2px;
+  }
+  .codeRow {
+    align-items: flex-end;
+  }
+  .codeRow button {
+    padding: 8px;
+    font-size: 13.2px;
+  }
+}

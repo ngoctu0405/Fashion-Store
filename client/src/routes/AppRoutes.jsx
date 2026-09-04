@@ -11,9 +11,6 @@ import SetDo from "../pages/Products/SetDo";
 import PhuKien from "../pages/Products/PhuKien";
 import Promotions from "../pages/Promotions/Promotions";
 import Policies from "../pages/Policies/Policies";
-import CustomerBenefits from "../pages/CustomerBenefits/CustomerBenefits";
-import PointsProgram from "../pages/CustomerBenefits/PointsProgram";
-import RewardsProgram from "../pages/CustomerBenefits/RewardsProgram";
 
 function AppRoutes() {
   return (
@@ -87,15 +84,11 @@ function AppRoutes() {
       />
       {[
         "/exchange-policy",
-        "/membership-policy",
         "/privacy-policy",
         "/shipping-policy",
       ].map((path) => (
         <Route key={path} path={path} element={<MainLayout><Policies /></MainLayout>} />
       ))}
-      <Route path="/customer-benefits" element={<MainLayout><CustomerBenefits /></MainLayout>} />
-      <Route path="/points-program" element={<MainLayout><PointsProgram /></MainLayout>} />
-      <Route path="/rewards-program" element={<MainLayout><RewardsProgram /></MainLayout>} />
     </Routes>
   );
 }

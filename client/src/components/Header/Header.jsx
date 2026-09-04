@@ -60,7 +60,6 @@ const getDisplayName = (fullName) => {
 };
 
 const Header = () => {
-  const [activeNavItem, setActiveNavItem] = useState("Trang Chủ");
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState("login");
   const [user, setUser] = useState(null);
@@ -129,21 +128,21 @@ const Header = () => {
       <div className={styles.topBar}>
         <div className={styles.logo}>
           <img
-            src={`/Name_Shop_Ko_Nen.png?v=${Date.now()}`}
-            alt="Zantusto Logo"
+            src="/Name_Shop_Ko_Nen.png"
+            alt="ZANTUSTO Logo"
             className={styles.logoImg}
           />
         </div>
 
         <div className={styles.topActionsGroup}>
           <div className={styles.iconActions}>
-            <button className={styles.iconBtn} aria-label="Search">
+            <button className={styles.iconBtn} aria-label="Tìm kiếm">
               <Search size={22} strokeWidth={1.5} />
             </button>
-            <button className={styles.iconBtn} aria-label="Cart">
+            <button className={styles.iconBtn} aria-label="Giỏ hàng">
               <ShoppingCart size={22} strokeWidth={1.5} />
             </button>
-            <button className={styles.iconBtn} aria-label="Notifications">
+            <button className={styles.iconBtn} aria-label="Thông báo">
               <Bell size={22} strokeWidth={1.5} />
             </button>
           </div>

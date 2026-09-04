@@ -12,13 +12,13 @@ function BannerCarousel() {
       interval={4000}
       pause="hover"
       className={styles.bannerCarousel}
-      aria-label="Bộ sưu tập nổi bật Zantusto"
+      aria-label="Bộ sưu tập nổi bật ZANTUSTO"
     >
       <Carousel.Item>
         <img
           className={styles.bannerImage}
           src={banner1}
-          alt="Mũ và Kính Zantusto"
+          alt="Mũ và Kính ZANTUSTO"
         />
       </Carousel.Item>
 
@@ -26,7 +26,7 @@ function BannerCarousel() {
         <img
           className={styles.bannerImage}
           src={banner2}
-          alt="Bộ sưu tập Balo Zantusto"
+          alt="Bộ sưu tập Balo ZANTUSTO"
         />
       </Carousel.Item>
 
@@ -34,7 +34,7 @@ function BannerCarousel() {
         <img
           className={styles.bannerImage}
           src={banner3}
-          alt="Khuyến mãi Zantusto"
+          alt="Khuyến mãi ZANTUSTO"
         />
       </Carousel.Item>
     </Carousel>

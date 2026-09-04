@@ -24,7 +24,7 @@ function About() {
         </Link>
       </div>
 
-      <section className={styles.highlights} aria-label="Cam kết của Zantusto">
+      <section className={styles.highlights} aria-label="Cam kết của ZANTUSTO">
         <article className={styles.highlightCard}>
           <Sparkles aria-hidden="true" />
           <h3>Thiết kế chọn lọc</h3>
